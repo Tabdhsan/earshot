@@ -84,9 +84,10 @@ final class ChicletBar: NSView {
         let empty = NSColor.labelColor.withAlphaComponent(0.12)
         let full = NSColor.labelColor.withAlphaComponent(dimmed ? 0.25 : 0.55)
         let filled = CGFloat(level) * CGFloat(n)
+        // Empty track is one continuous strip; only the filled part is split into chiclets.
+        empty.setFill(); bounds.fill()
         for i in 0..<n {
             let r = NSRect(x: CGFloat(i) * (w + gap), y: 0, width: w, height: bounds.height)
-            empty.setFill(); r.fill()
             let f = min(max(filled - CGFloat(i), 0), 1)   // partial chiclet for fine steps
             if f > 0 {
                 full.setFill()
